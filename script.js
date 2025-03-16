@@ -31,6 +31,37 @@ document.addEventListener("DOMContentLoaded", function () {
         displayRamen(currentIndex);
     });
 
-    // Display the first ramen on page load
+    
+    function addSubmitListener() {
+        const ramenForm = document.getElementById("ramen-form");
+        ramenForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("new-ramen-name").value;
+            const restaurant = document.getElementById("new-restaurant-name").value;
+            const rating = document.getElementById("new-ramen-rating").value;
+            const comment = document.getElementById("new-ramen-comment").value;
+            const imageFile = document.getElementById("new-ramen-image").files[0];
+
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.readAsDataURL(imageFile);
+                reader.onload = function (event) {
+                    const newRamen = {
+                        name,
+                        restaurant,
+                        image: event.target.result,
+                        rating,
+                        comment
+                    };
+                    ramens.push(newRamen);
+                    displayRamen(ramens.length - 1); 
+                    ramenForm.reset();
+                };
+            }
+        });
+    }
+
     displayRamen(currentIndex);
+    addSubmitListener();
 });
