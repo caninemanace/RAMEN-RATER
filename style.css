@@ -34,6 +34,8 @@ h1{
     color: aliceblue;
     padding: 20px;
     font-size: 28px;
+    display: flex;
+    flex-direction: column;
 }
 .image1 {
     display: block;
